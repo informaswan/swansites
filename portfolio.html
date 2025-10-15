@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="View our portfolio of fast, SEO-optimized static websites for small businesses and martial arts gyms.">
+    <title>Portfolio | SwanSites</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🦢</text></svg>">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --sage-green: #a8c5b8;
+            --sage-dark: #7a9986;
+            --sage-light: #d4e5de;
+            --text-dark: #2c3e37;
+            --text-medium: #5a6b64;
+            --text-light: #8a9b94;
+            --white: #ffffff;
+            --off-white: #fafbfa;
+            --border-light: #e5ede9;
+        }
+
+        html {
+            font-size: 16px;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Inter', 'Lato', 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background-color: var(--off-white);
+        }
+
+        header {
+            background-color: var(--white);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--sage-dark);
+            letter-spacing: -0.5px;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-medium);
+            font-weight: 500;
+            transition: color 0.3s ease;
+            padding: 0.5rem 0;
+        }
+
+        .nav-links a:hover,
+        .nav-links a:focus {
+            color: var(--sage-dark);
+            outline: none;
+        }
+
+        .nav-links a.active {
+            color: var(--sage-dark);
+            border-bottom: 2px solid var(--sage-green);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .portfolio-hero {
+            background: linear-gradient(135deg, var(--sage-light) 0%, var(--white) 100%);
+            padding: 5rem 0;
+            text-align: center;
+        }
+
+        .portfolio-hero h1 {
+            font-size: 3rem;
+            color: var(--sage-dark);
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+
+        .portfolio-intro {
+            font-size: 1.25rem;
+            color: var(--text-medium);
+            max-width: 700px;
+            margin: 0 auto;
+            line-height: 1.8;
+        }
+
+        .portfolio-section {
+            padding: 5rem 0;
+            background-color: var(--white);
+        }
+
+        .portfolio-grid {
+            display: grid;
+            gap: 4rem;
+        }
+
+        .project-card {
+            background-color: var(--off-white);
+            border-radius: 8px;
+            overflow: hidden;
+            border: 1px solid var(--border-light);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .project-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
+        }
+
+        .project-image {
+            width: 100%;
+            height: 400px;
+            background: linear-gradient(135deg, var(--sage-light) 0%, var(--sage-green) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .project-image::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: repeating-linear-gradient(
+                45deg,
+                transparent,
+                transparent 10px,
+                rgba(255, 255, 255, 0.05) 10px,
+                rgba(255, 255, 255, 0.05) 20px
+            );
+        }
+
+        .project-preview {
+            font-size: 4rem;
+            color: var(--white);
+            position: relative;
+            z-index: 1;
+        }
+
+        .project-content {
+            padding: 2.5rem;
+        }
+
+        .project-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .project-title {
+            font-size: 2rem;
+            color: var(--text-dark);
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .project-type {
+            color: var(--sage-dark);
+            font-weight: 600;
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .project-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background-color: var(--sage-green);
+            color: var(--white);
+            padding: 0.75rem 1.5rem;
+            text-decoration: none;
+            border-radius: 6px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 4px rgba(168, 197, 184, 0.2);
+        }
+
+        .project-link:hover,
+        .project-link:focus {
+            background-color: var(--sage-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(168, 197, 184, 0.3);
+            outline: none;
+        }
+
+        .project-description {
+            color: var(--text-medium);
+            font-size: 1.125rem;
+            line-height: 1.7;
+            margin-bottom: 1.5rem;
+        }
+
+        .project-features {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+            margin-top: 1.5rem;
+        }
+
+        .feature-tag {
+            background-color: var(--sage-light);
+            color: var(--sage-dark);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.875rem;
+            font-weight: 600;
+        }
+
+        footer {
+            background-color: var(--text-dark);
+            color: var(--white);
+            padding: 2rem 0;
+            text-align: center;
+        }
+
+        footer p {
+            margin: 0;
+            font-size: 0.938rem;
+            opacity: 0.9;
+        }
+
+        @media (max-width: 768px) {
+            .nav-container {
+                flex-direction: column;
+                gap: 1rem;
+                padding: 1rem;
+            }
+
+            .nav-links {
+                gap: 1.5rem;
+            }
+
+            .portfolio-hero h1 {
+                font-size: 2rem;
+            }
+
+            .portfolio-intro {
+                font-size: 1.125rem;
+            }
+
+            .project-image {
+                height: 300px;
+            }
+
+            .project-preview {
+                font-size: 3rem;
+            }
+
+            .project-content {
+                padding: 2rem 1.5rem;
+            }
+
+            .project-title {
+                font-size: 1.75rem;
+            }
+
+            .project-header {
+                flex-direction: column;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 0 1rem;
+            }
+
+            .portfolio-hero {
+                padding: 4rem 0;
+            }
+
+            .project-content {
+                padding: 1.5rem 1rem;
+            }
+
+            .portfolio-section {
+                padding: 3rem 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav aria-label="Main navigation">
+            <div class="nav-container">
+                <div class="logo">SwanSites</div>
+                <ul class="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="products.html">Products</a></li>
+                    <li><a href="portfolio.html" class="active" aria-current="page">Portfolio</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section class="portfolio-hero">
+            <div class="container">
+                <h1>Our Work</h1>
+                <p class="portfolio-intro">
+                    We take pride in building fast, beautiful, and effective websites that help our clients grow their businesses. Here's a showcase of our recent projects.
+                </p>
+            </div>
+        </section>
+
+        <section class="portfolio-section">
+            <div class="container">
+                <div class="portfolio-grid">
+                    
+                    <!-- Project 1: CSBJJ -->
+                    <article class="project-card">
+                        <div class="project-image">
+                            <div class="project-preview">🥋</div>
+                        </div>
+                        <div class="project-content">
+                            <div class="project-header">
+                                <div>
+                                    <h2 class="project-title">Colorado Springs Brazilian Jiu-Jitsu</h2>
+                                    <span class="project-type">Martial Arts Academy</span>
+                                </div>
+                                <a href="https://csbjj.com" target="_blank" rel="noopener noreferrer" class="project-link">
+                                    Visit Site →
+                                </a>
+                            </div>
+                            <p class="project-description">
+                                A clean, professional website for a Brazilian Jiu-Jitsu academy in Colorado Springs. Built to showcase classes, instructors, and help potential students easily find information and get in touch.
+                            </p>
+                            <div class="project-features">
+                                <span class="feature-tag">Responsive Design</span>
+                                <span class="feature-tag">SEO Optimized</span>
+                                <span class="feature-tag">Fast Loading</span>
+                                <span class="feature-tag">Contact Forms</span>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Project 2: Pair n Pour -->
+                    <article class="project-card">
+                        <div class="project-image">
+                            <div class="project-preview">🍷</div>
+                        </div>
+                        <div class="project-content">
+                            <div class="project-header">
+                                <div>
+                                    <h2 class="project-title">Pair n Pour</h2>
+                                    <span class="project-type">Food & Beverage</span>
+                                </div>
+                                <a href="https://pair-n-pour.com/" target="_blank" rel="noopener noreferrer" class="project-link">
+                                    Visit Site →
+                                </a>
+                            </div>
+                            <p class="project-description">
+                                An elegant website designed for a wine and food pairing experience. Features beautiful imagery, easy navigation, and a modern aesthetic that reflects the brand's sophisticated approach.
+                            </p>
+                            <div class="project-features">
+                                <span class="feature-tag">Modern Design</span>
+                                <span class="feature-tag">Mobile Friendly</span>
+                                <span class="feature-tag">Brand Focused</span>
+                                <span class="feature-tag">Performance</span>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Project 3: Maeve Writer -->
+                    <article class="project-card">
+                        <div class="project-image">
+                            <div class="project-preview">✍️</div>
+                        </div>
+                        <div class="project-content">
+                            <div class="project-header">
+                                <div>
+                                    <h2 class="project-title">Maeve Writer</h2>
+                                    <span class="project-type">Creative Portfolio</span>
+                                </div>
+                                <a href="https://maevewriter.com/" target="_blank" rel="noopener noreferrer" class="project-link">
+                                    Visit Site →
+                                </a>
+                            </div>
+                            <p class="project-description">
+                                A minimalist portfolio website for a professional writer. Designed to highlight written work and bio while maintaining a clean, distraction-free reading experience.
+                            </p>
+                            <div class="project-features">
+                                <span class="feature-tag">Clean Layout</span>
+                                <span class="feature-tag">Typography Focus</span>
+                                <span class="feature-tag">Portfolio Display</span>
+                                <span class="feature-tag">Lightweight</span>
+                            </div>
+                        </div>
+                    </article>
+
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 SwanSites. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>
