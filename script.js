@@ -1,5 +1,14 @@
+// EmailJS Configuration
+// Replace these with your actual EmailJS credentials
+const EMAILJS_PUBLIC_KEY = 'YOUR_PUBLIC_KEY'; // Get from EmailJS dashboard
+const EMAILJS_SERVICE_ID = 'YOUR_SERVICE_ID'; // e.g., 'service_abc123'
+const EMAILJS_TEMPLATE_ID = 'YOUR_TEMPLATE_ID'; // e.g., 'template_xyz789'
+
 // Contact Form Validation and Submission
 document.addEventListener('DOMContentLoaded', function() {
+    // Initialize EmailJS
+    emailjs.init(EMAILJS_PUBLIC_KEY);
+    
     const form = document.getElementById('contactForm');
     
     if (form) {
@@ -9,6 +18,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const nameError = document.getElementById('nameError');
         const emailError = document.getElementById('emailError');
         const successMessage = document.getElementById('successMessage');
+        const submitButton = form.querySelector('.submit-button');
         
         // Email validation regex
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -64,7 +74,7 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
         
-        // Form submission
+        // Form submission with EmailJS
         form.addEventListener('submit', function(e) {
             e.preventDefault();
             
@@ -73,19 +83,52 @@ document.addEventListener('DOMContentLoaded', function() {
             const isEmailValid = validateEmail();
             
             if (isNameValid && isEmailValid) {
-                // Hide form and show success message
-                form.style.display = 'none';
-                successMessage.style.display = 'block';
+                // Disable submit button and show loading state
+                submitButton.disabled = true;
+                submitButton.textContent = 'Sending...';
                 
-                // Scroll to success message
-                successMessage.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                // Prepare template parameters
+                const templateParams = {
+                    from_name: nameInput.value.trim(),
+                    from_email: emailInput.value.trim(),
+                    message: messageInput.value.trim() || 'No message provided',
+                    to_name: 'SwanSites' // You can customize this
+                };
                 
-                // Optional: Reset form after a delay (uncomment if needed)
-                // setTimeout(function() {
-                //     form.reset();
-                //     form.style.display = 'block';
-                //     successMessage.style.display = 'none';
-                // }, 5000);
+                // Send email using EmailJS
+                emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, templateParams)
+                    .then(function(response) {
+                        console.log('SUCCESS!', response.status, response.text);
+                        
+                        // Hide form and show success message
+                        form.style.display = 'none';
+                        successMessage.style.display = 'block';
+                        
+                        // Scroll to success message
+                        successMessage.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                        
+                        // Reset form
+                        form.reset();
+                        
+                        // Optional: Reset after delay
+                        setTimeout(function() {
+                            form.style.display = 'block';
+                            successMessage.style.display = 'none';
+                            submitButton.disabled = false;
+                            submitButton.textContent = 'Send Message';
+                        }, 5000);
+                        
+                    }, function(error) {
+                        console.error('FAILED...', error);
+                        
+                        // Show error message
+                        alert('Sorry, there was an error sending your message. Please try again or contact us directly.');
+                        
+                        // Re-enable submit button
+                        submitButton.disabled = false;
+                        submitButton.textContent = 'Send Message';
+                    });
+                    
             } else {
                 // Focus on first invalid field
                 if (!isNameValid) {
