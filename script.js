@@ -89,8 +89,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 
                 // Prepare template parameters
                 const templateParams = {
-                    from_name: nameInput.value.trim(),
-                    from_email: emailInput.value.trim(),
+                    name: nameInput.value.trim(),
+                    email: emailInput.value.trim(),
                     message: messageInput.value.trim() || 'No message provided',
                     to_name: 'SwanSites' // You can customize this
                 };
